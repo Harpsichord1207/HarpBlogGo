@@ -1,18 +1,23 @@
 package main
 
 import (
-	"fmt"
+	"HarpBlog/utils"
 	"github.com/gin-gonic/gin"
-	"github.com/russross/blackfriday/v2"
 )
 
 func main() {
 	r := gin.Default()
-
 	r.GET("/", home)
 
+	r.GET("/md", func(c *gin.Context) {
+		m := "### A Title"
+		c.Data(200, "text/html; charset=utf-8", utils.MD2HtmlBytes(m))
+	})
+
+	r.StaticFile("/favicon.ico", "./static/favicon.ico")
+	_ = r.Run()
 }
 
 func home(c *gin.Context) {
-	c.HTML()
+	c.String(200, "Hello World")
 }
