@@ -7,11 +7,13 @@ import (
 
 func main() {
 	r := gin.Default()
+	r.LoadHTMLGlob("templates/*")
+	r.Static("/static", "./static")
+
 	r.GET("/", home)
 
 	r.GET("/md", func(c *gin.Context) {
-		m := "### A Title"
-		c.Data(200, "text/html; charset=utf-8", utils.MD2HtmlBytes(m))
+		c.Data(200, "text/html; charset=utf-8", utils.GetArticle(1))
 	})
 
 	r.StaticFile("/favicon.ico", "./static/favicon.ico")
@@ -19,5 +21,5 @@ func main() {
 }
 
 func home(c *gin.Context) {
-	c.String(200, "Hello World")
+	c.HTML(200, "base.html", gin.H{})
 }
