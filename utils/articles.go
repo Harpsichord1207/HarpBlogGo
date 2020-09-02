@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 )
 
-func GetArticle(id uint16) []uint8 {
+func GetArticle(id uint64) []uint8 {
 	filePath := fmt.Sprintf("%s%d%s", "./data/", id, ".md")
 	b, e := ioutil.ReadFile(filePath)
 	if e != nil {
