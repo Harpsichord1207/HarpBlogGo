@@ -6,11 +6,16 @@ import (
 	"io/ioutil"
 )
 
-func GetArticle(id uint64) []uint8 {
+type Article struct {
+	
+}
+
+
+func GetArticle(id uint64) string {
 	filePath := fmt.Sprintf("%s%d%s", "./data/", id, ".md")
 	b, e := ioutil.ReadFile(filePath)
 	if e != nil {
 		panic(e)
 	}
-	return blackfriday.Run(b)
+	return string(blackfriday.Run(b))
 }
