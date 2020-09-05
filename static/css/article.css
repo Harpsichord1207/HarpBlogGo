@@ -1,0 +1,18 @@
+img {
+    border-radius: 6px;
+    margin: 5px auto;
+    -webkit-box-shadow: 0 0 10px #555;
+    display: block;
+    max-width: 100%;
+}
+pre {
+    padding: 10px;
+    background-color: #ececec;
+    border-radius: 5px;
+}
+blockquote {
+    padding: 5px 10px;
+    margin: 0 0 10px;
+    font-size: 15px;
+    border-left: 5px solid #4582ec;
+}

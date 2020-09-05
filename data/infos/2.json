@@ -6,5 +6,6 @@
   "tags": [
     "Druid",
     "Python"
-  ]
+  ],
+  "abstract": "Druid的查询一般以聚合(groupby)为主，select查询用的较少，目前工作正好遇到了，就顺便讲讲。"
 }

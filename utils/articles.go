@@ -14,6 +14,7 @@ type ArticleInfo struct {
 	Category string		`json:"category"`
 	Time     string		`json:"time"`
 	Tags     []string	`json:"tags"`
+	Abstract string		`json:"abstract"`
 }
 
 func GetArticleContent(id uint64) string {
@@ -35,4 +36,25 @@ func GetArticleMeta(id uint64) ArticleInfo {
 	decoder := json.NewDecoder(filePtr)
 	_ = decoder.Decode(&article)
 	return article
+}
+
+func GetArticles(page int) []ArticleInfo {
+	rd, e := ioutil.ReadDir("./data/articles")
+	if e != nil {
+		panic(e)
+	}
+	var articles []ArticleInfo
+	cnt := 0
+	for _, f := range rd {
+		if !f.IsDir() {
+			cnt++
+		}
+	}
+	articlesPerPage := 5
+	cnt -= articlesPerPage * (page - 1)
+	for ; articlesPerPage>0; articlesPerPage-- {
+		articles = append(articles, GetArticleMeta(uint64(cnt)))
+		cnt--
+	}
+	return articles
 }

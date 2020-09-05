@@ -6,5 +6,6 @@
   "tags": [
     "Python",
     "Web"
-  ]
+  ],
+  "abstract": "用简单的例子讲解AJAX跨域问题。"
 }

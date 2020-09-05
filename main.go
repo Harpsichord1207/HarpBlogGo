@@ -2,6 +2,7 @@ package main
 
 import (
 	"HarpBlog/utils"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"html/template"
 	"strconv"
@@ -13,10 +14,21 @@ func main() {
 	r.Static("/static", "./static")
 	r.StaticFile("/favicon.ico", "./static/favicon.ico")
 
-	r.LoadHTMLGlob("templates/*")
+	r.LoadHTMLFiles("templates/article.html", "templates/home.html")
 
 	r.GET("/", func(c *gin.Context) {
-		c.HTML(200, "home.html", gin.H{})
+		pageS := c.Query("page")
+		page := 1
+		if pageS != "" {
+			page, _ = strconv.Atoi(pageS)
+		}
+		fmt.Println(page)
+		c.HTML(200, "home.html", gin.H{
+			"articles": utils.GetArticles(page),
+			"nav": utils.GetHTMLComponent("nav.html"),
+			"calendar": utils.GetHTMLComponent("calendar.html"),
+			"pagination": utils.GeneratePagination(17),
+		})
 	})
 
 	r.GET("/articles/:articleId", func(c *gin.Context) {
@@ -27,6 +39,8 @@ func main() {
 		c.HTML(200, "article.html", gin.H{
 			"content": template.HTML(utils.GetArticleContent(articleId)),
 			"info": utils.GetArticleMeta(articleId),
+			"nav": utils.GetHTMLComponent("nav.html"),
+			"calendar": utils.GetHTMLComponent("calendar.html"),
 		})
 	})
 
