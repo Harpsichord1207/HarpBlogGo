@@ -52,7 +52,7 @@ func GetArticles(page int) []ArticleInfo {
 	}
 	articlesPerPage := 5
 	cnt -= articlesPerPage * (page - 1)
-	for ; articlesPerPage>0; articlesPerPage-- {
+	for ; articlesPerPage>0 && cnt>0; articlesPerPage-- {
 		articles = append(articles, GetArticleMeta(uint64(cnt)))
 		cnt--
 	}

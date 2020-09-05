@@ -2,7 +2,6 @@ package main
 
 import (
 	"HarpBlog/utils"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"html/template"
 	"strconv"
@@ -22,7 +21,6 @@ func main() {
 		if pageS != "" {
 			page, _ = strconv.Atoi(pageS)
 		}
-		fmt.Println(page)
 		c.HTML(200, "home.html", gin.H{
 			"articles": utils.GetArticles(page),
 			"nav": utils.GetHTMLComponent("nav.html"),

@@ -20,7 +20,7 @@ func GeneratePagination(total int) template.HTML {
 	html += "<ul class=\"pagination\">"
 	html += "<li class=\"page-item\"><a class=\"page-link\" href=\"#\">&laquo;</a></li>"
 	for i:=0; i*articlesPerPage<total; i++ {
-		html += fmt.Sprintf("<li class=\"page-item\"><a class=\"page-link\" href=\"#\">%d</a></li>", i+1)
+		html += fmt.Sprintf("<li class=\"page-item\"><a class=\"page-link\" href=\"\\?page=%d\">%d</a></li>", i+1, i+1)
 	}
 	html += "<li class=\"page-item\"><a class=\"page-link\" href=\"#\">&raquo;</a></li>"
 	html += "</ul></nav>"
