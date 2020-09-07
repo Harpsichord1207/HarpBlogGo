@@ -42,5 +42,21 @@ func main() {
 		})
 	})
 
+	r.GET("/search", func(c *gin.Context) {
+
+		keyword := c.Query("keyword")
+
+		if keyword != "" {
+			c.HTML(200, "home.html", gin.H{
+				"articles": utils.SearchArticles(keyword),
+				"nav": utils.GetHTMLComponent("nav.html"),
+				"calendar": utils.GetHTMLComponent("calendar.html"),
+			})
+		} else {
+			c.Redirect(302,"/")
+		}
+
+	})
+
 	_ = r.Run()
 }

@@ -6,6 +6,7 @@ import (
 	"github.com/russross/blackfriday/v2"
 	"io/ioutil"
 	"os"
+	"strings"
 )
 
 type ArticleInfo struct {
@@ -60,5 +61,25 @@ func GetArticles(page int) []ArticleInfo {
 		articles = append(articles, GetArticleMeta(uint64(cnt)))
 		cnt--
 	}
+	return articles
+}
+
+func SearchArticles(keyword string) []ArticleInfo {
+	var articles []ArticleInfo
+	cnt := GetArticlesNumber()
+
+	keywordSL := ""
+	keywordSL = strings.Replace(keyword, " ", "", -1)
+	keywordSL = strings.ToLower(keywordSL)
+
+	for i:=1; i<=cnt; i++ {
+		article := GetArticleMeta(uint64(i))
+		title := strings.ToLower(article.Title)
+		abstract := strings.ToLower(article.Abstract)
+		if strings.Index(title, keywordSL) != -1 || strings.Index(abstract, keywordSL) != -1 {
+			articles = append(articles, article)
+		}
+	}
+
 	return articles
 }
