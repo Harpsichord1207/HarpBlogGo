@@ -25,7 +25,7 @@ func main() {
 			"articles": utils.GetArticles(page),
 			"nav": utils.GetHTMLComponent("nav.html"),
 			"calendar": utils.GetHTMLComponent("calendar.html"),
-			"pagination": utils.GeneratePagination(17),
+			"pagination": utils.GeneratePagination(page),
 		})
 	})
 

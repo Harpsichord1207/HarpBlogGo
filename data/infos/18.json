@@ -1,0 +1,11 @@
+{
+  "id": 18,
+  "title": "使用Golang重写了本博客",
+  "category": "原创",
+  "time": "2020-09-07 17:21:12",
+  "tags": [
+    "Golang",
+    "Web"
+  ],
+  "abstract": "基于Golang的gin框架重写了本博客"
+}

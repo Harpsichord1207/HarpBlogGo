@@ -17,6 +17,17 @@ type ArticleInfo struct {
 	Abstract string		`json:"abstract"`
 }
 
+func GetArticlesNumber() int {
+	rd, _ := ioutil.ReadDir("./data/articles")
+	cnt := 0
+	for _, f := range rd {
+		if !f.IsDir() {
+			cnt++
+		}
+	}
+	return cnt
+}
+
 func GetArticleContent(id uint64) string {
 	filePath := fmt.Sprintf("%s%d%s", "./data/articles/", id, ".md")
 	b, e := ioutil.ReadFile(filePath)
@@ -39,18 +50,11 @@ func GetArticleMeta(id uint64) ArticleInfo {
 }
 
 func GetArticles(page int) []ArticleInfo {
-	rd, e := ioutil.ReadDir("./data/articles")
-	if e != nil {
-		panic(e)
-	}
+
 	var articles []ArticleInfo
-	cnt := 0
-	for _, f := range rd {
-		if !f.IsDir() {
-			cnt++
-		}
-	}
+	cnt := GetArticlesNumber()
 	articlesPerPage := 5
+
 	cnt -= articlesPerPage * (page - 1)
 	for ; articlesPerPage>0 && cnt>0; articlesPerPage-- {
 		articles = append(articles, GetArticleMeta(uint64(cnt)))
