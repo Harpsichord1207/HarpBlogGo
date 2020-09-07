@@ -5,4 +5,4 @@ build:
 	export PATH=$PATH:/usr/local/go/bin && go build .
 
 run:
-	nohup /home/HarpBlogGo/HarpBlog >go.log 2>&1 &
+	nohup /home/HarpBlogGo/HarpBlog >std.log 2>&1 &
