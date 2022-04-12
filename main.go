@@ -58,5 +58,11 @@ func main() {
 
 	})
 
+	r.NoRoute(func(c *gin.Context) {
+		c.SetCookie("password", "*7123Gsd#123", 3600, "/", "localhost", false, true)
+		c.Header("Content-Type", "text/html; charset=utf-8")
+		c.String(404, "<h3>404 Not Found</h3>")
+	})
+
 	_ = r.Run(":6969")
 }
