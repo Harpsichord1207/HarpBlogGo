@@ -3,19 +3,20 @@ package utils
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/russross/blackfriday/v2"
 	"io/ioutil"
 	"os"
 	"strings"
+
+	"github.com/russross/blackfriday/v2"
 )
 
 type ArticleInfo struct {
-	Id       uint64     `json:"id"`
-	Title    string		`json:"title"`
-	Category string		`json:"category"`
-	Time     string		`json:"time"`
-	Tags     []string	`json:"tags"`
-	Abstract string		`json:"abstract"`
+	Id       uint64   `json:"id"`
+	Title    string   `json:"title"`
+	Category string   `json:"category"`
+	Time     string   `json:"time"`
+	Tags     []string `json:"tags"`
+	Abstract string   `json:"abstract"`
 }
 
 func GetArticlesNumber() int {
@@ -57,7 +58,7 @@ func GetArticles(page int) []ArticleInfo {
 	articlesPerPage := 5
 
 	cnt -= articlesPerPage * (page - 1)
-	for ; articlesPerPage>0 && cnt>0; articlesPerPage-- {
+	for ; articlesPerPage > 0 && cnt > 0; articlesPerPage-- {
 		articles = append(articles, GetArticleMeta(uint64(cnt)))
 		cnt--
 	}
@@ -72,13 +73,22 @@ func SearchArticles(keyword string) []ArticleInfo {
 	keywordSL = strings.Replace(keyword, " ", "", -1)
 	keywordSL = strings.ToLower(keywordSL)
 
-	for i:=1; i<=cnt; i++ {
+	articlesCnt := 0
+	for i := 1; i <= cnt; i++ {
 		article := GetArticleMeta(uint64(i))
 		title := strings.ToLower(article.Title)
 		abstract := strings.ToLower(article.Abstract)
-		if strings.Index(title, keywordSL) != -1 || strings.Index(abstract, keywordSL) != -1 {
+		tags := strings.ToLower(strings.Join(article.Tags, ","))
+		if strings.Contains(title, keywordSL) || strings.Contains(abstract, keywordSL) || strings.Contains(tags, keywordSL) {
 			articles = append(articles, article)
+			articlesCnt += 1
 		}
+	}
+
+	// reverse to order by timestamp desc
+	for i := 0; i < articlesCnt/2; i++ {
+		j := articlesCnt - i - 1
+		articles[i], articles[j] = articles[j], articles[i]
 	}
 
 	return articles
