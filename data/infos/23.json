@@ -1,6 +1,6 @@
 {
     "id": 23,
-    "title": "算法之旅1 - 二分搜索",
+    "title": "算法之旅001 - 二分搜索Level1 Day1",
     "category": "原创",
     "time": "2022-04-12 15:53:18",
     "tags": [
@@ -8,5 +8,5 @@
       "数据结构",
       "Golang"
     ],
-    "abstract": "跟着LeetCode的Study Plan重温一遍各种经典算法，本期是二分搜索算法。"
+    "abstract": "跟着LeetCode的Study Plan重温一遍各种经典算法，本期是二分搜索算法Level1 Day1。"
   }
