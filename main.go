@@ -2,9 +2,10 @@ package main
 
 import (
 	"HarpBlog/utils"
-	"github.com/gin-gonic/gin"
 	"html/template"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -22,9 +23,9 @@ func main() {
 			page, _ = strconv.Atoi(pageS)
 		}
 		c.HTML(200, "home.html", gin.H{
-			"articles": utils.GetArticles(page),
-			"nav": utils.GetHTMLComponent("nav.html"),
-			"calendar": utils.GetHTMLComponent("calendar.html"),
+			"articles":   utils.GetArticles(page),
+			"nav":        utils.GetHTMLComponent("nav.html"),
+			"calendar":   utils.GetHTMLComponent("calendar.html"),
 			"pagination": utils.GeneratePagination(page),
 		})
 	})
@@ -35,9 +36,9 @@ func main() {
 			panic(err)
 		}
 		c.HTML(200, "article.html", gin.H{
-			"content": template.HTML(utils.GetArticleContent(articleId)),
-			"info": utils.GetArticleMeta(articleId),
-			"nav": utils.GetHTMLComponent("nav.html"),
+			"content":  template.HTML(utils.GetArticleContent(articleId)),
+			"info":     utils.GetArticleMeta(articleId),
+			"nav":      utils.GetHTMLComponent("nav.html"),
 			"calendar": utils.GetHTMLComponent("calendar.html"),
 		})
 	})
@@ -49,11 +50,11 @@ func main() {
 		if keyword != "" {
 			c.HTML(200, "home.html", gin.H{
 				"articles": utils.SearchArticles(keyword),
-				"nav": utils.GetHTMLComponent("nav.html"),
+				"nav":      utils.GetHTMLComponent("nav.html"),
 				"calendar": utils.GetHTMLComponent("calendar.html"),
 			})
 		} else {
-			c.Redirect(302,"/")
+			c.Redirect(302, "/")
 		}
 
 	})
