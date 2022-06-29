@@ -1,0 +1,11 @@
+{
+    "id": 35,
+    "title": "VS2022 + win10编译SFML2.6",
+    "category": "原创",
+    "time": "2022-06-29 15:11:09",
+    "tags": [
+      "C++",
+      "SFML"
+    ],
+    "abstract": "基于vs2022 + win10搭建最新的SFML环境。"
+  }
